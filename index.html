@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khodam Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .khodam-name {
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .khodam-description {
+            font-style: italic;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Khodam Generator</h2>
+        <form id="khodamForm">
+            <label for="name">Masukkan Nama Anda:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <button type="submit">Cari Khodam</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // List of random khodam
+        const khodamList = [
+            "Kereta Api", "Lampu Merah", "Singa Betina", "Tas Ransel", "Cangkir Kecil",
+            "Kuda Liar", "Pohon Cemara", "Jembatan Gantung", "Buku Catatan", "Topi Trucker",
+            "Bulan Purnama", "Pisau Lipat", "Sepatu Kets", "Jam Tangan", "Pulpen Warna",
+            "Piring Putih", "Gitar Elektrik", "Jendela Kaca", "Kamera Polaroid", "Taman Bermain",
+            "Kaus Kaki", "Celana Pendek", "Mobil Klasik", "Lumba-lumba", "Helm Sepeda",
+            "Pintu Geser", "Boneka Beruang", "Kemeja Kotak-kotak", "Kipas Angin", "Bola Voli",
+            "Meja Kerja", "Kulkas Mini", "Kota Kecil", "Pantai Pasir", "Lampu Sorot",
+            "Kucing Garong", "Gelas Kaca", "Kalung Mutiara", "Celana Jogger", "Jalan Setapak",
+            "Dompet Kulit", "Kompor Gas", "Kipas Angin", "Kue Lumpur", "Teropong Malam",
+            "TV Layar Datar", "Jembatan Kayu", "Kucing Persia", "Bantal Guling", "Kolam Renang",
+            "Mangga Muda", "Pohon Kelapa", "Teropong Bintang", "Tas Serut", "Kipas Tangan",
+            "Sepeda Lipat", "Lampu Gantung", "Jam Dinding", "Kaus Polos", "Buku Harian",
+            "Sepatu Boot", "Kamera Film", "Boneka Barbie", "Tas Tidur", "Gitar Akustik",
+            "Kemeja Denim", "Dompet Lipat", "Kunci Inggris", "Topi Baseball", "Jalan Tol",
+            "Bola Basket", "Perahu Layar", "Meja Belajar", "Cermin Hias", "Kursi Malas",
+            "Kotak P3K", "Kaca Mata", "Ponsel Canggih", "Kompor Listrik", "Koper Besar",
+            "Boneka Minion", "Celana Jeans", "Botol Minum", "Koin Kuno", "Pintu Garasi",
+            "Panci Masak", "Kursi Santai", "Belanja Online", "Jembatan Beton", "Senjata Tajam",
+            "Kemeja Batik", "Karpet Merah", "Jam Alarm", "Lampu Emergency", "Pot Bunga",
+            "Sarung Tangan", "Tas Pinggang", "Mesin Cuci", "Lampu Meja", "Bola Tinju"
+        ];
+
+        // Object to store generated khodam based on name
+        const khodamByNames = {};
+
+        const form = document.getElementById('khodamForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            if (name === '') {
+                alert('Masukkan nama Anda!');
+                return;
+            }
+
+            // Check if khodam already generated for this name
+            if (khodamByNames[name]) {
+                displayResult(name, khodamByNames[name]);
+            } else {
+                // Generate random index from khodamList
+                const randomIndex = Math.floor(Math.random() * khodamList.length);
+                const khodam = khodamList[randomIndex];
+                khodamByNames[name] = khodam; // Store generated khodam for this name
+
+                displayResult(name, khodam);
+            }
+        });
+
+        function displayResult(name, khodam) {
+            // Display result with sparkle effect
+            resultDiv.innerHTML = `<p><span class="khodam-name">${name}</span>, khodam Anda adalah <span class="khodam-description">✨${khodam}. ✨</span></p>`;
+        }
+    </script>
+</body>
+</html>
